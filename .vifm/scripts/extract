@@ -1,0 +1,20 @@
+#!/bin/bash
+
+extract_zip () {
+    FILE_TO_EXTRACT="$(pwd)/$FILENAME"
+    DEST_DIR="$(pwd)/${FILENAME%%.*}"
+
+    if test -d $DEST_DIR; then
+        rm -rf "$DEST_DIR"
+    fi
+
+    mkdir -p "$DEST_DIR"
+    unzip $FILE_TO_EXTRACT -d $DEST_DIR
+}
+
+FILENAME=$1
+
+case "$FILENAME" in
+    *.zip) extract_zip ;;
+    *) echo "file '$FILENAME' unsupported" ;;
+esac
